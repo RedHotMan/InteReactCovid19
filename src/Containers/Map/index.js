@@ -39,7 +39,9 @@ const MemoPopup = React.memo(({ country, closeCountryPopup }) => {
 });
 
 const Mapbox = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(
+    localStorage.getItem("data") ? JSON.parse(localStorage.getItem("data")) : []
+  );
   const [selectedCountry, setSelectedCountry] = useState(null);
 
   const [viewport, setViewport] = useState({
@@ -52,19 +54,16 @@ const Mapbox = () => {
   });
 
   useEffect(() => {
-    const cachedData = localStorage.getItem("data");
     const lastUpdate = localStorage.getItem("lastUpdate");
 
-    if (cachedData) {
+    if (data.length > 0) {
       if (lastUpdate && isLastUpdateTooOld(lastUpdate)) {
         fetchData();
-      } else {
-        setData(cachedData);
       }
     } else {
       fetchData();
     }
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     const escapeKey = (e) => {
@@ -80,7 +79,7 @@ const Mapbox = () => {
 
   const fetchData = () => {
     axios.get(`${process.env.REACT_APP_API_URL}/countries`).then((response) => {
-      localStorage.setItem("data", response.data);
+      localStorage.setItem("data", JSON.stringify(response.data));
       localStorage.setItem("lastUpdate", new Date().getTime());
       setData(response.data);
     });
@@ -94,10 +93,7 @@ const Mapbox = () => {
         onViewportChange={setViewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       >
-        {data ? (
-          <MemoMarkersList data={data} showCountryPopup={setSelectedCountry} />
-        ) : null}
-
+        <MemoMarkersList data={data} showCountryPopup={setSelectedCountry} />
         {selectedCountry ? (
           <MemoPopup
             country={selectedCountry}
