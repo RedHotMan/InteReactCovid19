@@ -1,0 +1,25 @@
+language: node_js
+node_js:
+  - "stable"
+
+cache:
+  directories:
+    - node_modules
+
+install:
+  - npm install
+
+script:
+  - npm run test
+
+notifications:
+  email: false
+
+after_success:
+  - echo "After Success Step"
+
+after_failure:
+  - echo "After failure Step"
+
+before_deploy:
+  - echo "Before Deploy Step."

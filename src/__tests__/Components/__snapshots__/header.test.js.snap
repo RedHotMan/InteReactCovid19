@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Should render Header correctly 1`] = `
+"<Styled(WithStyles(ForwardRef(AppBar))) position=\\"static\\">
+  <Styled(WithStyles(ForwardRef(Toolbar)))>
+    <i className=\\"ri-earth-line\\" />
+    <Styled(WithStyles(ForwardRef(Typography))) variant=\\"subtitle2\\">
+      InteReactCovid19
+    </Styled(WithStyles(ForwardRef(Typography)))>
+    <Styled(WithStyles(ForwardRef(IconButton))) onClick={[Function: onClick]}>
+      <i className=\\"ri-github-fill\\" />
+    </Styled(WithStyles(ForwardRef(IconButton)))>
+  </Styled(WithStyles(ForwardRef(Toolbar)))>
+</Styled(WithStyles(ForwardRef(AppBar)))>"
+`;

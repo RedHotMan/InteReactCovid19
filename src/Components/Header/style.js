@@ -9,7 +9,7 @@ export const StyledAppBar = styled(AppBar)`
   background-color: #1f3349 !important;
 `;
 
-export const StyledToolabr = styled(Toolbar)`
+export const StyledToolbar = styled(Toolbar)`
   height: 2.5rem;
   min-height: 0 !important;
 `;
