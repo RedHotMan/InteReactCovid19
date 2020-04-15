@@ -23,8 +23,5 @@ describe("Map", () => {
     expect(reactMapGl.prop("zoom")).toEqual(2);
     expect(reactMapGl.prop("longitude")).toEqual(0);
     expect(reactMapGl.prop("latitude")).toEqual(0);
-    expect(reactMapGl.prop("mapStyle")).toEqual(
-      "mapbox://styles/redhotman/ck8okqrlz00h01ip918lbxl5e/draft"
-    );
   });
 });

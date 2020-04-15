@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import ReactMapGl from "react-map-gl";
 import { MapContainer } from "./style";
+import { getCountriesData } from "../../utils";
 import MapPopup from "../../Components/MapPopup";
 import MapMarker from "../../Components/MapMarker";
 
@@ -77,12 +77,9 @@ const Mapbox = () => {
     };
   }, []);
 
-  const fetchData = () => {
-    axios.get(`${process.env.REACT_APP_API_URL}/countries`).then((response) => {
-      localStorage.setItem("data", JSON.stringify(response.data));
-      localStorage.setItem("lastUpdate", new Date().getTime());
-      setData(response.data);
-    });
+  const fetchData = async () => {
+    const fetchedData = await getCountriesData();
+    setData(fetchedData ? fetchedData : []);
   };
 
   return (
