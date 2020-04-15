@@ -90,7 +90,7 @@ const Mapbox = () => {
     <MapContainer>
       <ReactMapGl
         {...viewport}
-        mapStyle="mapbox://styles/redhotman/ck8okqrlz00h01ip918lbxl5e/draft"
+        mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
         onViewportChange={setViewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       >
