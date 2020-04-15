@@ -56,7 +56,7 @@ const Mapbox = () => {
     const lastUpdate = localStorage.getItem("lastUpdate");
 
     if (cachedData) {
-      if (lastUpdate && isLastUpdateTooOld) {
+      if (lastUpdate && isLastUpdateTooOld(lastUpdate)) {
         fetchData();
       } else {
         setData(cachedData);
