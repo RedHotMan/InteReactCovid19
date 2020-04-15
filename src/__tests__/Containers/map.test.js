@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 import Mapbox from "../../Containers/Map";
 import ReactMapGl from "react-map-gl";
 import { MapContainer } from "../../Containers/Map/style";
