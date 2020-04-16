@@ -6,6 +6,7 @@ import { getCountriesData } from "../../utils";
 import MapPopup from "../../Components/MapPopup";
 import MapMarker from "../../Components/MapMarker";
 import MapCluster from "../../Components/MapCluster";
+import Legend from "../../Components/Legend";
 
 const isLastUpdateTooOld = (lastUpdate) => {
   return (
@@ -164,6 +165,7 @@ const Mapbox = () => {
           />
         ) : null}
       </ReactMapGl>
+      <Legend />
     </MapContainer>
   );
 };
