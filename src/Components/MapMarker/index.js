@@ -1,6 +1,6 @@
 import React from "react";
 import { Marker } from "react-map-gl";
-import { CustomFabBtn } from "./style";
+import { CustomFabBtn } from "../style";
 import { formatNumber } from "../../utils";
 
 const formatNumberOptions = {
