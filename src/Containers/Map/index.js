@@ -13,35 +13,52 @@ const isLastUpdateTooOld = (lastUpdate) => {
   );
 };
 
-const MemoMarkersList = React.memo(({ clusters, showCountryPopup }) => {
-  console.log("re-render markers and clusters");
-  return clusters.map((cluster, index) => {
-    const { cluster: isCluster, point_count: pointCount } = cluster.properties;
-    const [latitude, longitude] = cluster.geometry.coordinates;
+const MemoMarkersList = React.memo(
+  ({ clusters, supercluster, showCountryPopup, viewport, changeViewport }) => {
+    return clusters.map((cluster, index) => {
+      const {
+        cluster: isCluster,
+        point_count: pointCount,
+        cluster_id: clusterId,
+      } = cluster.properties;
+      const [longitude, latitude] = cluster.geometry.coordinates;
 
-    if (isCluster) {
+      if (isCluster) {
+        return (
+          <MapCluster
+            key={index}
+            latitude={latitude}
+            longitude={longitude}
+            pointCount={pointCount}
+            onClusterClick={() => {
+              const expansionZoom = Math.min(
+                supercluster.getClusterExpansionZoom(clusterId),
+                8
+              );
+              changeViewport({
+                ...viewport,
+                latitude,
+                longitude,
+                zoom: expansionZoom,
+              });
+            }}
+          />
+        );
+      }
+
       return (
-        <MapCluster
-          key={index}
-          latitude={latitude}
-          longitude={longitude}
-          pointCount={pointCount}
+        <MapMarker
+          key={cluster.country.country}
+          country={cluster.country}
+          showCountryPopup={(e) => {
+            e.preventDefault();
+            showCountryPopup(cluster.country);
+          }}
         />
       );
-    }
-
-    return (
-      <MapMarker
-        key={cluster.country.country}
-        country={cluster.country}
-        showCountryPopup={(e) => {
-          e.preventDefault();
-          showCountryPopup(cluster.country);
-        }}
-      />
-    );
-  });
-});
+    });
+  }
+);
 
 const MemoPopup = React.memo(({ country, closeCountryPopup }) => {
   return (
@@ -113,7 +130,7 @@ const Mapbox = () => {
     country: { ...country },
   }));
 
-  const { clusters } = useSupercluster({
+  const { clusters, supercluster } = useSupercluster({
     points,
     zoom: viewport.zoom,
     bounds: mapRef.current
@@ -133,7 +150,10 @@ const Mapbox = () => {
       >
         <MemoMarkersList
           clusters={clusters}
+          supercluster={supercluster}
           showCountryPopup={setSelectedCountry}
+          viewport={viewport}
+          changeViewport={setViewport}
         />
         {selectedCountry ? (
           <MemoPopup
