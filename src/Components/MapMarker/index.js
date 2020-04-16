@@ -1,12 +1,7 @@
 import React from "react";
 import { Marker } from "react-map-gl";
 import { CustomFabBtn } from "../style";
-import { formatNumber } from "../../utils";
-
-const formatNumberOptions = {
-  notation: "compact",
-  compactDisplay: "short",
-};
+import { formatFabNumbers } from "../../utils";
 
 const MapMarker = ({ country, showCountryPopup }) => {
   return (
@@ -18,7 +13,7 @@ const MapMarker = ({ country, showCountryPopup }) => {
       latitude={country.countryInfo.lat}
     >
       <CustomFabBtn onClick={showCountryPopup}>
-        {formatNumber(country.cases, formatNumberOptions)}
+        {formatFabNumbers(country.cases)}
       </CustomFabBtn>
     </Marker>
   );

@@ -20,7 +20,6 @@ const MapPopup = ({ country, closeCountryPopup }) => {
       latitude={country.countryInfo.lat}
       closeButton={false}
       closeOnClick={false}
-      // onClose={closeCountryPopup}
     >
       <StyledPopupHead>
         <PopupCountryName variant="h5">{country.country}</PopupCountryName>

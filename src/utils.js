@@ -4,6 +4,23 @@ export const formatNumber = (number, options) => {
   return new Intl.NumberFormat("en-US", { ...options }).format(number);
 };
 
+// This shit is here only because of Safari that not support compact Intl.NumberFormat option...
+export const formatFabNumbers = (num) => {
+  if (num >= 1000000000) {
+    return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+  }
+  if (num >= 1000000) {
+    return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+  }
+  if (num >= 1000) {
+    if (num >= 100000) {
+      return (num / 1000).toFixed(0).replace(/\.0$/, "") + "K";
+    }
+    return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+  }
+  return num;
+};
+
 export const getCountriesData = async () => {
   let fetchedData = [];
   await axios

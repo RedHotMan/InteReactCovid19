@@ -6,8 +6,8 @@ export const CustomFabBtn = styled.span`
   justify-content: center;
   align-items: center;
   color: white;
-  width: 3em;
-  height: 3em;
+  width: 3.5em;
+  height: 3.5em;
   font-size: 0.6em;
   font-weight: bold;
   background-color: #f50057;
