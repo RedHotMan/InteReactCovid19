@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import ReactMapGl from "react-map-gl";
+import ReactMapGl, { FlyToInterpolator } from "react-map-gl";
 import useSupercluster from "use-supercluster";
 import { MapContainer } from "./style";
 import { getCountriesData } from "../../utils";
@@ -40,6 +40,8 @@ const MemoMarkersList = React.memo(
                 latitude,
                 longitude,
                 zoom: expansionZoom,
+                transitionInterpolator: new FlyToInterpolator({ speed: 2 }),
+                transitionDuration: 1000,
               });
             }}
           />
