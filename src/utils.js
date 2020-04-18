@@ -21,6 +21,9 @@ export const formatFabNumbers = (num) => {
   return num;
 };
 
+export const addArrayValues = (accumulator, currentValue) =>
+  accumulator + currentValue;
+
 export const getCountriesData = async () => {
   let fetchedData = [];
   await axios

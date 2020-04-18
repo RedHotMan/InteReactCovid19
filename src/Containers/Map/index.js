@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import ReactMapGl, { FlyToInterpolator } from "react-map-gl";
 import useSupercluster from "use-supercluster";
 import { MapContainer } from "./style";
-import { getCountriesData } from "../../utils";
+import { getCountriesData, addArrayValues } from "../../utils";
 import MapPopup from "../../Components/MapPopup";
 import MapMarker from "../../Components/MapMarker";
 import MapCluster from "../../Components/MapCluster";
@@ -25,11 +25,16 @@ const MemoMarkersList = React.memo(
       const [longitude, latitude] = cluster.geometry.coordinates;
 
       if (isCluster) {
+        const childrenMarkers = supercluster.getLeaves(clusterId);
+        const casesArray = childrenMarkers.map((c) => c.country.cases);
+        const totalCases = casesArray.reduce(addArrayValues);
+
         return (
           <MapCluster
             key={index}
             latitude={latitude}
             longitude={longitude}
+            casesCount={totalCases}
             pointCount={pointCount}
             onClusterClick={() => {
               const expansionZoom = Math.min(
