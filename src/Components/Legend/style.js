@@ -1,16 +1,24 @@
 import styled from "styled-components";
 import { CustomFabBtn } from "../style";
+import { CustomClusterFabNumerBtn } from "../MapCluster/style";
 
 export const LegendToggleFabBtn = styled(CustomFabBtn)`
   &&& {
     position: absolute;
     background-color: ${(props) =>
-      props.showMapLegend ? "#813FC5" : "#3FC581"};
+      props.showMapLegend ? "#813FC5" : "#D942FB"};
     margin: 1.2rem;
     right: 0;
     width: 2.5rem;
     height: 2.5rem;
     z-index: 100;
+  }
+`;
+
+export const LegendCustomClusterFabNumerBtn = styled(CustomClusterFabNumerBtn)`
+  &&& {
+    position: relative;
+    transform: none;
   }
 `;
 

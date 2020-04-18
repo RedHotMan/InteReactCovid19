@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   LegendToggleFabBtn,
+  LegendCustomClusterFabNumerBtn,
   LegendDiv,
   LegendItem,
   LegendFabBtnDiv,
@@ -9,11 +10,13 @@ import { CustomFabBtn } from "../style";
 import { CustomClusterFabBtn } from "../MapCluster/style";
 
 const Legend = () => {
-  const [showMapLegend, setShowMapLegend] = useState(true);
+  const [showMapLegend, setShowMapLegend] = useState(false);
+
   return (
     <>
       <LegendToggleFabBtn
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault();
           setShowMapLegend(!showMapLegend);
         }}
         showMapLegend={showMapLegend}
@@ -37,13 +40,20 @@ const Legend = () => {
           </LegendItem>
           <LegendItem>
             <LegendFabBtnDiv>
-              <CustomClusterFabBtn>5</CustomClusterFabBtn>
+              <CustomClusterFabBtn>10K</CustomClusterFabBtn>
             </LegendFabBtnDiv>
             <p>
-              Cluster of country markers displaying the number of markers inside
-              it. Try click on it
+              Cluster of country markers displaying the number of confirmed
+              cases inside it. Click on it to destructure into smaller ones or
+              into coutry markers.
               <i className="ri-cursor-line"></i>
             </p>
+          </LegendItem>
+          <LegendItem>
+            <LegendFabBtnDiv>
+              <LegendCustomClusterFabNumerBtn>3</LegendCustomClusterFabNumerBtn>
+            </LegendFabBtnDiv>
+            <p>Number of country markers inside a cluster.</p>
           </LegendItem>
         </LegendDiv>
       ) : null}
