@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactMapGl, { FlyToInterpolator } from "react-map-gl";
-import { Paper, InputBase, IconButton } from "@material-ui/core";
+import { InputBase, IconButton } from "@material-ui/core";
 import useSupercluster from "use-supercluster";
-import { MapContainer } from "./style";
+import { MapContainer, SearchDiv, SearchForm } from "./style";
 import { getCountriesData, addArrayValues } from "../../utils";
 import MapPopup from "../../Components/MapPopup";
 import MapMarker from "../../Components/MapMarker";
@@ -195,26 +195,9 @@ const Mapbox = () => {
           />
         ) : null}
       </ReactMapGl>
-      <div
-        style={{
-          position: "absolute",
-          right: 0,
-          width: "30rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-        }}
-      >
-        <Paper
-          style={{
-            padding: "0 0.2rem",
-            display: "flex",
-            width: "17rem",
-            alignItems: "center",
-            backgroundColor: "rgba(87, 102, 119, 0.8)",
-          }}
-          component="form"
-        >
+
+      <SearchDiv>
+        <SearchForm component="form">
           <IconButton onClick={() => searchForCountry()}>
             <i style={{ color: "#fff" }} className="ri-search-line"></i>
           </IconButton>
@@ -224,9 +207,9 @@ const Mapbox = () => {
             value={searchedCountry}
             onChange={(e) => setSearchedCountry(e.target.value)}
           />
-        </Paper>
+        </SearchForm>
         <Legend />
-      </div>
+      </SearchDiv>
     </MapContainer>
   );
 };
