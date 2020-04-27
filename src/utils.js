@@ -39,3 +39,9 @@ export const getCountriesData = async () => {
 
   return fetchedData;
 };
+
+export const isLastUpdateTooOld = (lastUpdate) => {
+  return (
+    new Date().getTime() - process.env.REACT_APP_DATA_EXPIRATION > lastUpdate
+  );
+};
