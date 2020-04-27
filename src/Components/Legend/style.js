@@ -4,7 +4,6 @@ import { CustomClusterFabNumerBtn } from "../MapCluster/style";
 
 export const LegendToggleFabBtn = styled(CustomFabBtn)`
   &&& {
-    position: absolute;
     background-color: ${(props) =>
       props.showMapLegend ? "#813FC5" : "#D942FB"};
     margin: 1.2rem;
@@ -25,11 +24,12 @@ export const LegendCustomClusterFabNumerBtn = styled(CustomClusterFabNumerBtn)`
 export const LegendDiv = styled.div`
   position: absolute;
   right: 0;
-  max-width: 20rem;
+  top: 4.5rem;
+  width: 20rem;
   background: #334f6e;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   padding: 0.7rem 1.5rem;
-  margin: 2rem;
+  margin: 0 2rem;
   font-size: 0.8rem;
   line-height: 2;
   color: #fff;

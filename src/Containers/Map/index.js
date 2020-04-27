@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactMapGl, { FlyToInterpolator } from "react-map-gl";
+import { Paper, InputBase, IconButton } from "@material-ui/core";
 import useSupercluster from "use-supercluster";
 import { MapContainer } from "./style";
 import { getCountriesData, addArrayValues } from "../../utils";
@@ -86,6 +87,7 @@ const Mapbox = () => {
     localStorage.getItem("data") ? JSON.parse(localStorage.getItem("data")) : []
   );
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [searchedCountry, setSearchedCountry] = useState("");
 
   const [viewport, setViewport] = useState({
     width: "100%",
@@ -124,6 +126,29 @@ const Mapbox = () => {
   const fetchData = async () => {
     const fetchedData = await getCountriesData();
     setData(fetchedData ? fetchedData : []);
+  };
+
+  const searchForCountry = () => {
+    if (!searchedCountry) {
+      return;
+    }
+
+    const res = data.filter((country) => {
+      return country.country === searchedCountry;
+    });
+
+    if (res.length) {
+      setViewport({
+        ...viewport,
+        zoom: 5,
+        latitude: res[0].countryInfo.lat,
+        longitude: res[0].countryInfo.long,
+        transitionInterpolator: new FlyToInterpolator({ speed: 2 }),
+        transitionDuration: 1000,
+      });
+
+      setSelectedCountry(res[0]);
+    }
   };
 
   const points = data.map((country) => ({
@@ -170,7 +195,38 @@ const Mapbox = () => {
           />
         ) : null}
       </ReactMapGl>
-      <Legend />
+      <div
+        style={{
+          position: "absolute",
+          right: 0,
+          width: "30rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+        }}
+      >
+        <Paper
+          style={{
+            padding: "0 0.2rem",
+            display: "flex",
+            width: "17rem",
+            alignItems: "center",
+            backgroundColor: "rgba(87, 102, 119, 0.8)",
+          }}
+          component="form"
+        >
+          <IconButton onClick={() => searchForCountry()}>
+            <i style={{ color: "#fff" }} className="ri-search-line"></i>
+          </IconButton>
+          <InputBase
+            style={{ marginLeft: "2rem", color: "#fff" }}
+            placeholder="Search for a country…"
+            value={searchedCountry}
+            onChange={(e) => setSearchedCountry(e.target.value)}
+          />
+        </Paper>
+        <Legend />
+      </div>
     </MapContainer>
   );
 };
