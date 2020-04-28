@@ -64,7 +64,7 @@ const Mapbox = () => {
     }
 
     const res = data.filter((country) => {
-      return country.country === searchedCountry;
+      return country.country.toLowerCase() === searchedCountry.toLowerCase();
     });
 
     if (res.length) {
