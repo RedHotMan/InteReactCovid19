@@ -61,4 +61,4 @@ const Legend = () => {
   );
 };
 
-export default Legend;
+export default React.memo(Legend);

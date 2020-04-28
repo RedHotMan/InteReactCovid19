@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactMapGl, { FlyToInterpolator } from "react-map-gl";
-import { InputBase, IconButton } from "@material-ui/core";
 import useSupercluster from "use-supercluster";
-import { MapContainer, SearchDiv, SearchForm } from "./style";
+import { MapContainer, LegendDiv } from "./style";
 import { getCountriesData, isLastUpdateTooOld } from "../../utils";
 import MemoMarkersList from "../../Components/MemoMarkersList";
 import MemoPopup from "../../Components/MemoPopup";
 import Legend from "../../Components/Legend";
+import Search from "../../Components/Search";
 
 const Mapbox = () => {
   const mapRef = useRef();
@@ -124,20 +124,14 @@ const Mapbox = () => {
         ) : null}
       </ReactMapGl>
 
-      <SearchDiv>
-        <SearchForm component="form">
-          <IconButton onClick={() => searchForCountry()}>
-            <i style={{ color: "#fff" }} className="ri-search-line"></i>
-          </IconButton>
-          <InputBase
-            style={{ marginLeft: "2rem", color: "#fff" }}
-            placeholder="Search for a country…"
-            value={searchedCountry}
-            onChange={(e) => setSearchedCountry(e.target.value)}
-          />
-        </SearchForm>
+      <LegendDiv>
+        <Search
+          setSearchedCountry={setSearchedCountry}
+          searchForCountry={searchForCountry}
+          searchedCountry={searchedCountry}
+        />
         <Legend />
-      </SearchDiv>
+      </LegendDiv>
     </MapContainer>
   );
 };
