@@ -16,6 +16,7 @@ const Mapbox = () => {
   );
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [searchedCountry, setSearchedCountry] = useState("");
+  const [searchError, setSearchError] = useState(false);
 
   const [viewport, setViewport] = useState({
     width: "100%",
@@ -58,6 +59,7 @@ const Mapbox = () => {
 
   const searchForCountry = () => {
     if (!searchedCountry) {
+      setSearchError(true);
       return;
     }
 
@@ -76,6 +78,8 @@ const Mapbox = () => {
       });
 
       setSelectedCountry(res[0]);
+    } else {
+      setSearchError(true);
     }
   };
 
@@ -129,6 +133,8 @@ const Mapbox = () => {
           setSearchedCountry={setSearchedCountry}
           searchForCountry={searchForCountry}
           searchedCountry={searchedCountry}
+          searchError={searchError}
+          setSearchError={setSearchError}
         />
         <Legend />
       </LegendDiv>

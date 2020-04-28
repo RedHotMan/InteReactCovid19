@@ -7,6 +7,7 @@ export const SearchForm = styled(Paper)`
     display: flex;
     width: 17rem;
     align-items: center;
-    background-color: rgba(87, 102, 119, 0.8);
+    background-color: ${(props) =>
+      props.error ? "rgba(245, 0, 87, 0.6)" : "rgba(87, 102, 119, 0.8)"};
   }
 `;
